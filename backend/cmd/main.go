@@ -30,8 +30,12 @@ func main() {
 		w.Write([]byte("ok"))
 	})
 
-	fmt.Println("listening on :3333")
-	err = http.ListenAndServe(":3333", nil)
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+	fmt.Printf("listening on :%s\n", port)
+	err = http.ListenAndServe(":"+port, nil)
 	if err != nil {
 		panic(err)
 	}
